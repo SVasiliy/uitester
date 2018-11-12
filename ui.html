@@ -5,11 +5,13 @@
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 <script type="text/babel">
     const rootElement = document.getElementById('root')
-    const Message = (props) => <div>{props.msg}</div>
-    const element = <div className='container'>
-        <Message msg="Hello world" />
-        <Message msg="Goodbye" />
-    </div>
-    
-    ReactDOM.render(element, rootElement)
+
+    function tick(){
+        const time = new Date().toLocaleTimeString()
+        const element = <div>It is {time}</div>
+        ReactDOM.render(element, rootElement)
+    }
+
+    tick()
+    setInterval(tick,1000)
 </script>
