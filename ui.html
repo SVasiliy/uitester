@@ -3,15 +3,32 @@
 <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
 <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+<style>
+    .box--small{
+        width: 60px;
+        height: 60px;
+    }
+</style>
+
 <script type="text/babel">
     const rootElement = document.getElementById('root')
 
-    function tick(){
-        const time = new Date().toLocaleTimeString()
-        const element = <div>It is {time}</div>
-        ReactDOM.render(element, rootElement)
+    function Box({style, ...rest}) {
+        return(
+            <div 
+                className = "box box--small"
+                style = {{paddingLeft: 20, ...style}}
+                {...rest}
+            />
+        )
     }
 
-    tick()
-    setInterval(tick,1000)
-</script>
+    const element = (<div>
+        <div>
+            <Box style={{backgroundColor: 'lightblue'}}>box</Box>
+        </div>
+    </div>)
+
+    ReactDOM.render(element, rootElement)
+</script>   
