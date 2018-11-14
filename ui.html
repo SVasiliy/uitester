@@ -5,14 +5,21 @@
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
 <style>
-    .box--small{
-        width: 60px;
-        height: 60px;
+    .button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
     }
 </style>
 
 <script type="text/babel">
     const rootElement = document.getElementById('root')
+    const state = {eventCount: 0}
 
     function Box({style, ...rest}) {
         return(
@@ -24,11 +31,27 @@
         )
     }
 
-    const element = (<div>
-        <div>
-            <Box style={{backgroundColor: 'lightblue'}}>box</Box>
-        </div>
-    </div>)
+    function App() {
+        return (
+            <div>
+                <p>button clicked {state.eventCount} times</p>
+                <p>
+                    <button onClick={() => setState({eventCount: state.eventCount + 1})} 
+                            className="button">click</button>
+                </p>
+            </div>
+        )
+    }
 
-    ReactDOM.render(element, rootElement)
+    function renderApp() {
+        ReactDOM.render(<App />, rootElement)
+    }
+
+    function setState(newState){
+        Object.assign(state, newState)
+        renderApp()
+    }
+
+    renderApp()
+    
 </script>   
