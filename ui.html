@@ -5,6 +5,11 @@
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
 <style>
+    .box--small{
+        background-color: lightseagreen; 
+        width: 60px;
+        height: 60px;
+    }
     .button {
         background-color: #4CAF50; /* Green */
         border: none;
@@ -19,7 +24,29 @@
 
 <script type="text/babel">
     const rootElement = document.getElementById('root')
-    const state = {eventCount: 0}
+
+    class MyApp extends React.Component{
+        state = {eventCount: 0}
+
+        handleButtonClick = ()=>{
+            this.state.eventCount = this.state.eventCount + 1
+            this.forceUpdate();
+        }
+
+        render() {
+            const state = this.state
+
+            return (
+                <div>
+                    <p>button clicked {state.eventCount} times</p>
+                    <p>
+                        <button onClick={this.handleButtonClick} 
+                                className="button">click</button>
+                    </p>
+                </div>
+            )
+        }
+    }
 
     function Box({style, ...rest}) {
         return(
@@ -34,22 +61,14 @@
     function App() {
         return (
             <div>
-                <p>button clicked {state.eventCount} times</p>
-                <p>
-                    <button onClick={() => setState({eventCount: state.eventCount + 1})} 
-                            className="button">click</button>
-                </p>
+                <Box>box</Box>
+                <MyApp />
             </div>
         )
     }
 
     function renderApp() {
         ReactDOM.render(<App />, rootElement)
-    }
-
-    function setState(newState){
-        Object.assign(state, newState)
-        renderApp()
     }
 
     renderApp()
